@@ -1,5 +1,5 @@
 import { createElement } from "./component.js";
-
+import { iconColors } from "./colors.js";
 
 
 
@@ -7,7 +7,7 @@ import { createElement } from "./component.js";
 const messageBtn = createElement(
   "button",
   {
-    className:["border-2 border-red-500","p-2","w-36", "h-22", "flex", "flex-col","text-sm"]
+    className:["border-2 border-red-500","p-2","w-32", "h-22", "flex", "flex-col","text-sm"]
   },
   [
     createElement(
@@ -26,7 +26,7 @@ const messageBtn = createElement(
 const groupBtn = createElement(
   "button",
   {
-    className:["border-2 border-red-500","p-2","w-36", "h-22", "flex", "flex-col","text-sm"]
+    className:["border-2 border-red-500","p-2","w-32", "h-22", "flex", "flex-col","text-sm"]
   },
   [
     createElement(
@@ -45,7 +45,7 @@ const groupBtn = createElement(
 const diffusionBtn = createElement(
   "button",
   {
-    className:["border-2 border-red-500","p-2","w-36", "h-22", "flex", "flex-col","text-sm"]
+    className:["border-2 border-red-500","p-2","w-32", "h-22", "flex", "flex-col","text-sm"]
   },
   [
     createElement(
@@ -66,7 +66,7 @@ const diffusionBtn = createElement(
 const archiveBtn = createElement(
   "button",
   {
-    className:["border-2 border-red-500","p-2","w-36", "h-22", "flex", "flex-col","text-sm"]
+    className:["border-2 border-red-500","p-2","w-32", "h-22", "flex", "flex-col","text-sm"]
   },
   [
     createElement(
@@ -85,7 +85,7 @@ const archiveBtn = createElement(
 const nouveauBtn = createElement(
   "button",
   {
-    className:["border-2 border-red-500","p-2","w-36", "h-22", "flex", "flex-col"]
+    className:["border-2 border-red-500","p-2","w-32", "h-22", "flex", "flex-col"]
   },
   [
     createElement(
@@ -105,7 +105,7 @@ const nouveauBtn = createElement(
 const sidebar = createElement(
   "div",
   {
-    className:["w-1/12","h-full","bg-slate-100" ,"flex","items-center","justify-center","flex","flex-col","gap-3","rounded-tl-xl","rounded-bl-xl"]
+    className:["w-1/12","h-full","bg-[#f0efe8]" ,"flex","items-center","justify-center","flex","flex-col","gap-3","rounded-tl-xl","rounded-bl-xl"]
   },
   [
     messageBtn,
@@ -129,7 +129,7 @@ const barreRecherche = createElement(
 const discussion = createElement(
   "div",
   {
-    className:["w-3/12","h-full","bg-slate-200","p-3"]
+    className:["w-3/12","h-full","bg-[#f9f7f5]","p-3"]
   },[
     createElement("h1",{className:["text-xl"]},"Discussions"),
         barreRecherche
@@ -141,21 +141,41 @@ const discussion = createElement(
 const actions = createElement(
   "div",
   {
-    className : ["w-[40%]","h-full","bg-slate-500"]
+    className : ["w-[25%]","h-full","text-xl","flex","justify-around","items-center"],
+    vFor:{
+        each:["fa-solid fa-delete-left","fa-solid fa-box-archive","fa-solid fa-square","fa-solid fa-trash"],
+        render:(item)=>{
+        const iconKey = item.split(" ").pop(); 
+        const color = iconColors[iconKey] || "text-black";
+          return createElement(
+            "div",
+            {
+              className:["w-[17%]","h-full","border-2",`border-${color}`,"rounded-full","flex","justify-around","items-center"]
+            },
+            [
+              createElement(
+                "i",
+                {
+              className: [...item.split(" "), color]                }
+              )
+            ]
+          )
+        }
+    }
   }
 );
 
 const photo_profil = createElement(
   "div",
   {
-    className : ["w-[3.9%]","h-full","rounded-full","bg-slate-500"]
+    className : ["w-[3.6%]","h-full","rounded-full","bg-slate-500"]
   }
 );
 
 const headerZoneMessage = createElement(
   "div",
   {
-    className:["w-full","h-[7%]","bg-red-50","p-2","rounded-tr-xl","flex","justify-between","items-center"]
+    className:["w-full","h-[7%]","bg-[#efe7d7]","p-2","rounded-tr-xl","flex","justify-between","items-center","border-2","border-b-white"]
   },
   [
     photo_profil,
@@ -166,7 +186,7 @@ const headerZoneMessage = createElement(
 const corpsZoneMessage = createElement(
   "div",
   {
-    className:["w-full","h-[83%]","bg-red-100"]
+    className:["w-full","h-[83%]","bg-[#efe7d7]"]
   }
 );
 
@@ -174,21 +194,27 @@ const textMessage  = createElement(
   "input",
    {
     type:"text",
-    className:["w-[90%]","h-[70%]","bg-red-800","rounded-xl"]
+    className:["w-[94%]","h-[70%]","bg-[#f2eff0]","rounded-xl"]
   }
 );
 
 const envoyer = createElement(
   "button",
   {
-    className : ["w-[5%]","h-[80%]","rounded-full","bg-slate-500"]
-  }
+    className : ["w-[5%]","h-[80%]","rounded-full","bg-green-500","flex","justify-center","items-center"]
+  },[
+    createElement("i",
+      {
+        className:["fa-solid"," fa-arrow-right","text-xl","text-white"]
+      }
+    )
+  ]
 )
 
 const inputZoneMessage = createElement(
   "div",
   {
-    className:["w-full","h-[10%]","bg-red-300","rounded-br-xl","py-2","px-4","flex","items-center","justify-between"]
+    className:["w-full","h-[10%]","rounded-br-xl","py-2","px-2","flex","items-center","justify-between"]
   },
   [
     textMessage,
@@ -198,7 +224,7 @@ const inputZoneMessage = createElement(
 const zoneMessage = createElement(
   "div",
   {
-    className:["w-8/12","h-full","bg-slate-300","rounded-tr-xl","rounded-br-xl"]
+    className:["w-8/12","h-full","rounded-tr-xl","rounded-br-xl","bg-[#f9f7f5]"]
   },
   [
     headerZoneMessage,
